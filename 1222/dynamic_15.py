@@ -1,5 +1,5 @@
 #baekjoon 21317
-#미해결
+
 n = int(input())
 b = []
 for i in range(n - 1):
