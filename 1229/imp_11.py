@@ -1,39 +1,31 @@
 #baekjoon 1244
-
 n = int(input())
-switch = [0] + list(map(int, input().split()))
+switch = list(map(int, input().split()))
+
+def swap(number):
+    if switch[number - 1] == 1:
+        switch[number - 1] = 0
+    else:
+        switch[number - 1] = 1
 
 for i in range(int(input())):
-    g, num = map(int, input().split())
-
+    g, number = map(int, input().split())
     if g == 1:
-        for i in range(num, n + 1, num):
-            switch[i] = 1 if switch[i] == 0 else 0
-
-    elif g == 2:
-        if num + 1 > n or num - 1 < 1:
-            switch[num] = 1 if switch[num] == 0 else 0
+        while number < n:
+            swap(number)
+            number += number
+    else:
+        swap(number)
+        if number > 1 and number < n:
+            s, e = number - 1, number + 1
         else:
-            if switch[num + 1] == switch[num - 1]:
-                left = num - 1
-                right = num + 1
+            break
+        while switch[s - 1] == switch[e - 1]:
+            if s == 1 or e == n:
+                break
+            swap(s)
+            swap(e)
+            s -= 1
+            e += 1
 
-                while 1:
-                    if left - 1 < 1 or right + 1 > n:
-                        break
-
-                    if switch[left - 1] != switch[right + 1]:
-                        break
-
-                    else:
-                        left -= 1
-                        right += 1
-
-                for i in range(left, right + 1):
-                    switch[i] = 1 if switch[i] == 0 else 0
-            else:
-                switch[num] = 1 if switch[num] == 0 else 0
-
-
-for i in range(1, n, 20):
-    print(*switch[i:i+20])
+print(*switch)

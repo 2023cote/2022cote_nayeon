@@ -1,55 +1,44 @@
 #baekjoon 20546
 m = int(input())
-arr = list(map(int, input().split()))
-jm, sm, j, s, status = m, m, 0, 0, [0, '']
-yesterday = arr[0]
+stock = list(map(int, input().split()))
+def BNP() :
+    asset = m
+    st = 0
+    for i in range(14):
+        if stock[i] <= asset:
+            st += asset // stock[i]
+            asset = asset % stock[i]
+    return asset + stock[-1] * st
 
+def TIMING() :
+    asset = m
+    st = 0
+    inc = [0 for _ in range(14)]
+    for i in range(1, 14):
+        if stock[i - 1] < stock[i]:
+            if inc[i - 1] > 0:
+                inc[i] = inc[i - 1] + 1
+            else:
+                inc[i] = 1
+        elif stock[i - 1] > stock[i]:
+            if inc[i - 1] < 0:
+                inc[i] = inc[i - 1] - 1
+            else:
+                inc[i] = -1
+        if inc[i] == 3:
+            asset += st * stock[i]
+            st = 0
+        if inc[i] == -3:
+            st += asset // stock[i]
+            asset = asset % stock[i]
+    return asset + stock[-1] * st
 
-for i in range(14):
-    # 준현
-    if jm // arr[i] != 0:
-        temp = jm // arr[i]
-        j += (jm // arr[i])
-        jm -= temp * arr[i]
+jun = BNP()
+min = TIMING()
 
-    # 성민
-    change = 0
-    if yesterday < arr[i]:
-        if status[1] == '-':
-            change = 1
-        status[1] = '+'
-
-    elif yesterday > arr[i]:
-        if status[1] == '+':
-            change = 1
-        status[1] = '-'
-
-    yesterday = arr[i]
-
-    if change:
-        status[0] = 1
-    elif status[1] != '':
-        status[0] += 1
-
-    if status[0] >= 3:
-        if status[1] == '+':
-            if sm // arr[i] != 0:
-                sm += s * arr[i]
-                s = 0
-
-        if status[1] == '-':
-            temp = sm // arr[i]
-            s += (sm // arr[i])
-            sm -= temp * arr[i]
-
-
-last_day = arr[-1]
-sm += (s * last_day)
-jm += (j * last_day)
-
-if sm == jm:
-    print("SAMESAME")
-elif sm > jm:
+if jun > min:
+    print("BNP")
+elif jun < min:
     print("TIMING")
 else:
-    print("BNP")
+    print("SAMESAME")

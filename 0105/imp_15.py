@@ -1,35 +1,36 @@
 #baekjoon 12933
-duck = input()
-visited = [False] * len(duck)
-cnt = 0
+string = input()
+quack = ['q', 'u', 'a', 'c', 'k']
 
-if len(duck) % 5 != 0:
+duck = []
+wrong = False
+if len(string) % 5 != 0 or string[-1] != 'k':
     print(-1)
-    exit()
+    exit(0)
+for i in range(len(string)):
+    tmp = ''
+    wrong = True
+    if string[i] == 'q' :
+        for j in range(len(duck)):
+            if duck[j][-1] == 'k':
+                duck[j].append(string[i])
+                wrong = False
+                break
+        if wrong == True:
+            duck.append(['q'])
+            wrong = False
+    else:
+        for k in range(1, 5):
+            if quack[k] == string[i]:
+                tmp = quack[k - 1]
+                break
+        for j in range(len(duck)):
+            if duck[j][-1] == tmp:
+                duck[j].append(string[i])
+                wrong = False
+                break
+        if wrong == True:
+            print(-1)
+            exit(0)
 
-
-def solve(start):
-    global cnt
-    quack = 'quack'
-    j = 0
-    first = True
-    for i in range(start, len(duck)):
-        if duck[i] == quack[j] and not visited[i]:
-            visited[i] = True
-            if duck[i] == 'k':
-                if first:
-                    cnt += 1
-                    first = False
-                j = 0
-                continue
-            j += 1
-
-
-for i in range(len(duck)):
-    if duck[i] == 'q' and not visited[i]:
-        solve(i)
-
-if not all(visited) or cnt == 0:
-    print(-1)
-else:
-    print(cnt)
+print(len(duck))
