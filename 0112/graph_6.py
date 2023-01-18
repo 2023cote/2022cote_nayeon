@@ -1,5 +1,4 @@
 #baekjoon 16918
-import sys
 from collections import deque
 
 def loc_bomb():
