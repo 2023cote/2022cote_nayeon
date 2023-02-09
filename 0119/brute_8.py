@@ -5,7 +5,7 @@ arr = list(map(str,input().split()))
 length = len(str(N))
 
 while(True):
-    temp = list(product( arr, repeat=length))
+    temp = list(product(arr, repeat=length))
     answer = []
 
     for i in temp :
