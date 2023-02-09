@@ -16,3 +16,20 @@ for i in range(M):
                 maxPref = tmp
 
 print(maxPref)
+
+##풀이2
+# from itertools import combinations
+# N, M  = map(int, input().split())
+# pref = []
+# for _ in range(N):
+#     pref.append(list(map(int, input().split())))
+
+# Coms = combinations([i for i in range(M)], 3)
+# maxS = 0
+# for c in Coms:
+#     S = 0
+#     for i in range(3):
+#         S += max(pref[i][c[0]], pref[i][c[1]], pref[i][c[2]])
+#     if maxS < S:
+#         maxS = S
+# print(maxS)

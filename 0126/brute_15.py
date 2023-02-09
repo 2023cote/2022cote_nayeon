@@ -1,4 +1,5 @@
 #baekjoon 16508 전공책
+#미해결
 word = input()
 N = int(input())
 price = []
@@ -7,7 +8,9 @@ for i in range(N):
     p, b = input().split()
     price.append(int(p))
     books.append(b)
+
 minCost = sum(price) + 1
+
 for i in range(1, 2**N):
     check = bin(i)[2:].zfill(N)
     S = [0 for _ in range(len(word))]
@@ -21,7 +24,9 @@ for i in range(1, 2**N):
                         S[k] = 1
     if sum(list(S)) == len(word) and minCost > cost:
         minCost = cost
+
 if minCost == sum(price) + 1:
     print(-1)
+    
 else:
     print(minCost)

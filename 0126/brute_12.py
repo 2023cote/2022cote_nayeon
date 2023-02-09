@@ -19,3 +19,23 @@ for i in range(1, int(sqrt(N) + 1)):
             print(3)
             exit(0)
 print(4)
+
+#풀이2
+from math import sqrt
+n = int(input())
+
+if sqrt(n) == int(sqrt(n)):
+    print(1)
+    exit(0)
+m = 4
+for i in range(int(sqrt(n)) + 1):
+    if sqrt(n - i**2) == int(sqrt(n - i**2)):
+        print(2)
+        exit(0)
+    if m == 3:
+        continue
+    for j in range(int(sqrt(n - i**2)) + 1):
+        if sqrt(n - i**2 - j**2) == int(sqrt(n - i**2 - j**2)):
+            m = 3
+            break
+print(m)

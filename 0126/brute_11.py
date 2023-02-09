@@ -39,5 +39,34 @@ for i in range(1, 10):
                     flag = False
             if flag == True:
                 cnt += 1
-                print
 print(cnt)
+
+# from itertools import permutations
+
+# N = int(input())
+# li = []
+# strike = [0 for _ in range(N)]
+# ball = [0 for _ in range(N)]
+
+# for i in range(N):
+#     n, strike[i], ball[i] = map(int, input().split())
+#     li.append(str(n))
+
+# cnt = 0
+# candidates = permutations([i for i in range(1, 10)], 3)
+# for c in candidates:
+#     flag = True
+#     for i in range(N):
+#         s = 0
+#         b = 0
+#         for j in range(3):
+#             if int(li[i][j]) == c[j]:
+#                 s += 1
+#             elif int(li[i][(j + 1)%3]) == c[j] or int(li[i][(j + 2)%3]) == c[j]:
+#                 b += 1
+#         if strike[i] != s or ball[i] != b:
+#             flag = False
+#             break
+#     if flag == True:
+#         cnt += 1
+# print(cnt)
